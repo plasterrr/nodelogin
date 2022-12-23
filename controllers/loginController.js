@@ -18,7 +18,6 @@ const loginUser = (req, res) => {
 	}
 
 	User.findOne({ name: username }).then((user) => {
-		console.log(`${user}`);
 		if (user && user.password === password) {
 			// Authenticate the user
 			req.session.loggedin = true;
