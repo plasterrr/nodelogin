@@ -1,23 +1,31 @@
 const User = require("../models/User");
 
-// wyswietla storne domowa jesli uzytkownik jest zalogowany
+// wyswietla strone domowa jesli uzytkownik jest zalogowany
 const homeView = (req, res) => {
-	if (req.session.loggedin) {
-		res.render("home", {
-			page: 'Home page',
-			username: req.session.username
-		});
-	} else {
-		res.redirect('/');
+	
+	let username = req.session.username;
+
+	// wyswietl blad jesli uzytkownik nie jest zalogowany
+	if (!username || !req.session.loggedin) {
+		res.send('Please login first! <a href="/" class="text signup-link">Login</a>');
 	}
+
+	// wszystko ok, wygeneruj strone
+	res.render("home", {
+		page: 'Home page',
+		username: username
+	});
+
 };
 
-// wyswietla strone z profilem
+// wyswietla strone z profilem jesli uzytkownik jest zalogowany
 const profileView = (req, res) => {
+	
 	let username = req.session.username;
-	// Ensure the input fields exists and are not empty
+	
+	// wyswietl blad jesli uzytkownik nie jest zalogowany
 	if (!username || !req.session.loggedin) {
-		res.send('Please login first!');
+		res.send('Please login first! <a href="/" class="text signup-link">Login</a>');
 	}
 
 	User.findOne({ name: username }).then((user) => {
