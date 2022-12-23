@@ -1,0 +1,29 @@
+<%- include('header.ejs'); %>
+
+		<div class="content">
+			<h2>Profile Page</h2>
+			<div>
+				<p>Your account details are below:</p>
+				<table>
+					<tr>
+						<td>Username:</td>
+						<td><%= username %></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><%= password %></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><%= email %></td>
+					</tr>
+					<tr>
+						<td>Created:</td>
+						<td><%= date %></td>
+					</tr>
+				</table>
+			</div>
+			<a href="/home" class="text signup-link">Go back to Home</a>
+		</div>
+	</body>
+</html>

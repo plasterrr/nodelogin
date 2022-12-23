@@ -1,0 +1,24 @@
+{
+    "server": {
+        "host": "localhost",
+        "port": 3000
+    },
+    "mysql": {
+        "host"    : "sql7.freesqldatabase.com",
+	    "user"    : "sql7585421",
+	    "password": "QuNZVGkRe9",
+	    "database": "sql7585421"
+    },
+    "session": {
+        "secret": "secret",
+	    "resave": true,
+	    "saveUninitialized": true
+    },
+    "mail": {
+        "user": "ml8735462@gmail.com",
+        "password": "isxcfibvojlzxkpb"
+    },
+    "mongo": {
+        "connectionString": "mongodb+srv://dbadmin:pX8MoJtuUZYq0zIA@cluster0.1u9piui.mongodb.net/?retryWrites=true&w=majority"
+    }
+}
