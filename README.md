@@ -2,7 +2,7 @@
  1. Sklonuj repo lub pobierz i rozpakuj zip'a z kodem zrodlowym.
  2. Otworz wiersz polecen i przejdz do katalogu z projektem (nodelogin-master)
  3. Zeby zainstalowac zaleznosci, wpisz polecenie (wystarczy tylko raz): `npm install`
- 4. Zeby uruchomic aplikacje, wpisz polecenie: `nodemon index.js`
+ 4. Zeby uruchomic aplikacje, wpisz polecenie: `npm start`
  5. Otworz przegladarke i wpisz w pasku adresu: http://localhost:3000
  6. Zeby zamknac aplikacje, wcisnij `Ctrl+C` w wierszu polecen.
 
