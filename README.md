@@ -24,6 +24,7 @@
     - email: minimalnie 6 znakow; musi zawierac @ i .
     - haslo: minimalnie 8 znakow
     - haslo1 i haslo2 musza byc takie same
- 4. Wlaczenie https z wlasnym certyfikatem.
+ 4. Wlaczenie https z wlasnym certyfikatem. 
+    - https://timonweb.com/javascript/running-expressjs-server-over-https/
  5. Duzo bardziej skomplikowane: stworzyc forum albo czat dostepny po zalogowaniu.
     - przyklad tutaj https://betterprogramming.pub/socket-io-and-nextjs-build-real-time-chat-application-part-1-976555ecba
