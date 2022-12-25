@@ -4,10 +4,12 @@ const {
     signUpView,
     loginView,
     passwordReminderView,
+    otpView,
     signUpUser,
     loginUser,
     logoutUser,
-    passwordReminder
+    passwordReminder,
+    otpVerify
 } = require("../controllers/loginController");
 const { 
     homeView, 
@@ -21,10 +23,12 @@ router.get("/", loginView);
 router.get("/signup", signUpView);
 router.get("/passwd", passwordReminderView);
 router.get("/logout", logoutUser);
+router.get("/otp", otpView);
 
 router.post("/signup", signUpUser);
 router.post("/passwd", passwordReminder);
 router.post("/auth", loginUser);
+router.post("/otp", otpVerify);
 
 router.get("/home", homeView);
 router.get("/profile", profileView);

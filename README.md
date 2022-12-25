@@ -14,7 +14,6 @@
 
 ## MongoDB
  1. pobierz i zainstaluj mongodb compass https://www.mongodb.com/products/compass
- 2. do polaczenia z baza uzyj nastepujacy URI/connection string: `mongodb+srv://dbadmin:pX8MoJtuUZYq0zIA@cluster0.1u9piui.mongodb.net/?authMechanism=DEFAULT`
 
 ## Jak korzystac z git'a
  1. instalacja i konfiguracja git cli https://docs.github.com/en/get-started/quickstart/set-up-git
