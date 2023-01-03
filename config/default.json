@@ -9,10 +9,10 @@
         "saveUninitialized": true
     },
     "mail": {
-        "user": "ml8735462@gmail.com",
-        "password": "isxcfibvojlzxkpb"
+        "user": "",
+        "password": ""
     },
     "mongo": {
-        "connectionString": "mongodb+srv://dbadmin:pX8MoJtuUZYq0zIA@cluster0.1u9piui.mongodb.net/?retryWrites=true&w=majority"
+        "connectionString": ""
     }
 }

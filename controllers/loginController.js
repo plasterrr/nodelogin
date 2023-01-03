@@ -1,7 +1,7 @@
 const path = require('path');
 const config = require('config');
-const nodemailer = require('nodemailer');
 const User = require("../models/User");
+const mail = require("./mailController.js")
 
 // wyswietla strone logowania
 const loginView = (req, res) => {
@@ -19,11 +19,14 @@ const loginUser = (req, res) => {
 
 	User.findOne({ name: username }).then((user) => {
 		if (user && user.password === password) {
-			// Authenticate the user
-			req.session.loggedin = true;
+			// send OTP
+			const otp = generateOTP();
 			req.session.username = username;
+			req.session.otp = otp;
+			const msg = `<h3>Dear <b>${username}</b>, here's your one time password: </h3><p><h1>${otp}</h1></p>`;
+			mail.sendEmail(user.email, "otp code", msg);
 			// Redirect to home page
-			res.redirect('/home');
+			res.redirect('/otp');
 		} else {
 			res.send('Incorrect Username and/or Password! Try to <a href="/" class="text signup-link">Login</a> again');
 		}
@@ -85,29 +88,8 @@ const passwordReminder = (req, res) => {
 	User.findOne({ email: email }).then((user) => {
 		if (user && user.name === username) {
 			let password = user.password;
-
-			var transporter = nodemailer.createTransport({
-				service: 'gmail',
-				auth: {
-					user: config.get('mail.user'),
-					pass: config.get('mail.password')
-				}
-			});
-			var mailOptions = {
-				from: 'noreply@gmail.com',
-				to: email,
-				subject: 'password reminder',
-				html: `<h3>Dear <b>${username}</b>, here's your current password: </h3><p><h1>${password}</h1></p>`
-			};
-				  
-			transporter.sendMail(mailOptions, function(error, info){
-				if (error) {
-					console.log(error);
-				} else {
-					console.log('Email sent: ' + info.response);
-				}
-			});
-
+            const msg = `<h3>Dear <b>${username}</b>, here's your current password: </h3><p><h1>${password}</h1></p>`;
+            mail.sendEmail(email, "password reminder", msg)
 			res.send(`Check your email and try to <a href="/" class="text signup-link">Login</a> again`);
 		} else {
 			res.send('Incorrect Username and/or email!');
@@ -123,12 +105,47 @@ const logoutUser = (req, res, next) => {
     res.redirect('/');
 };
 
+// wyswietla strone logowania otp
+const otpView = (req, res) => {
+	res.sendFile(path.join(__dirname + '/../views/otp.html'));
+};
+
+// obsluguje logike przypomnienia hasla
+const otpVerify = (req, res) => {
+	const {number1, number2, number3, number4 } = req.body;
+
+	// Ensure the input fields exists and are not empty
+	if (!number1 || !number2 || !number3 || !number4 ) {
+		res.send('Please enter valid OTP!');
+	}
+	
+	const otp = number1+number2+number3+number4;
+	if (otp === req.session.otp) {
+		// Authenticate the user
+		req.session.loggedin = true;
+		res.redirect('/home');
+	} else {
+		res.sendFile(path.join(__dirname + '/../views/otp.html'));
+	}
+};
+
+function generateOTP(len=4) {
+    var digits = '0123456789';
+    let OTP = '';
+    for (let i = 0; i < len; i++ ) {
+        OTP += digits[Math.floor(Math.random() * 10)];
+    }
+    return OTP;
+}
+
 module.exports = {
     signUpView,
     loginView,
     passwordReminderView,
+	otpView,
     signUpUser,
     loginUser,
     logoutUser,
-    passwordReminder
+    passwordReminder,
+	otpVerify
 };
