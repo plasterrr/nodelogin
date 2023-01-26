@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const PERMISSIONS = {
+const USERTYPE = {
   USER: 'user',
   ADMIN: 'admin'
 }
@@ -18,10 +18,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    permissions: {
+    usertype: {
       type: String,
       required: false,
-      default: PERMISSIONS.USER,
+      default: USERTYPE.USER,
     },
     date: {
       type: Date,
@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema(
   {
     methods: {
       isAdmin() {
-        return (PERMISSIONS.ADMIN === this.permissions);
+        return (USERTYPE.ADMIN === this.usertype);
       }
     }
   }
