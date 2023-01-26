@@ -22,11 +22,14 @@ const loginUser = (req, res) => {
 			// send OTP
 			const otp = generateOTP();
 			req.session.username = username;
+			req.session.isAdmin = user.isAdmin();
 			req.session.otp = otp;
 			const msg = `<h3>Dear <b>${username}</b>, here's your one time password: </h3><p><h1>${otp}</h1></p>`;
 			mail.sendEmail(user.email, "otp code", msg);
-			// Redirect to home page
+			// Redirect to otp page
 			res.redirect('/otp');
+			//req.session.loggedin = true;
+		    //res.redirect('/home');
 		} else {
 			res.send('Incorrect Username and/or Password! Try to <a href="/" class="text signup-link">Login</a> again');
 		}

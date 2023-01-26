@@ -13,7 +13,8 @@ const {
 } = require("../controllers/loginController");
 const { 
     homeView, 
-    profileView 
+    profileView,
+    adashView 
 } = require("../controllers/dashboardController");
 
 const router = express.Router();
@@ -32,5 +33,7 @@ router.post("/otp", otpVerify);
 
 router.get("/home", homeView);
 router.get("/profile", profileView);
+router.get("/adash", adashView);
+
 
 module.exports = router;
